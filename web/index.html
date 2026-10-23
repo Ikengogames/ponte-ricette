@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ponte Codici Ricetta</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Specialistica ambulatoriale · SSN</span>
+    <h1>Ponte Codici Ricetta</h1>
+    <p class="lede">Inserisci il codice di una prestazione così come è scritto sulla ricetta di una regione e trova il codice corrispondente nel catalogo dell'altra. Il collegamento passa dal codice del nomenclatore nazionale.</p>
+  </header>
+
+  <form class="card" id="f" autocomplete="off">
+    <div class="row">
+      <label for="da">Regione della ricetta
+        <select id="da"><option value="LOM">Lombardia</option><option value="TOS">Toscana</option></select>
+      </label>
+      <button type="button" class="swap" id="swap" aria-label="Inverti regioni" title="Inverti regioni">⇄</button>
+      <label for="a">Regione dove prenotare
+        <select id="a"><option value="TOS">Toscana</option><option value="LOM">Lombardia</option></select>
+      </label>
+    </div>
+    <div class="go">
+      <div class="code-field">
+        <label for="codice">Codice prestazione o descrizione
+          <input type="text" id="codice" spellcheck="false" placeholder="es. 088950 oppure holter" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sugg">
+        </label>
+        <ul class="sugg" id="sugg" role="listbox" hidden></ul>
+      </div>
+      <button type="submit" class="primary">Cerca</button>
+    </div>
+    <div class="examples">Esempi:
+      <button type="button" class="chip" data-da="LOM" data-c="088950"><b>088950</b> Holter</button>
+      <button type="button" class="chip" data-da="LOM" data-c="088901.08"><b>088901.08</b> Visita cardiologica di controllo</button>
+      <button type="button" class="chip" data-da="LOM" data-c="6988941.07"><b>6988941.07</b> RM bacino</button>
+      <button type="button" class="chip" data-da="TOS" data-c="1601"><b>1601</b> Holter 24h (Toscana)</button>
+    </div>
+  </form>
+
+  <section id="out" aria-live="polite"></section>
+
+  <footer>
+    <p><strong>Strumento indicativo.</strong> Le corrispondenze sono calcolate dai cataloghi pubblici e possono contenere errori o essere superate da aggiornamenti. Prima di prenotare conferma il codice con il CUP o con il medico prescrittore.</p>
+    <p>Fonti: nomenclatore nazionale (Allegato 4 DPCM 12/01/2017 aggiornato); catalogo prestazioni Regione Toscana (<a href="https://dati.toscana.it/dataset/rt-prestazioni-specialistica" target="_blank" rel="noopener">OpenData Toscana</a>, CC BY); nomenclatore tariffario Lombardia DGR XII/3630 del 16/12/2024; codici SISS da <a href="https://www.dati.lombardia.it/Sanit-/Transcodifica-Codici-prestazioni/7ugz-vcug" target="_blank" rel="noopener">Open Data Lombardia – Transcodifica codici prestazioni</a>.</p>
+  </footer>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
