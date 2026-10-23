@@ -47,6 +47,20 @@
 
   <section id="out" aria-live="polite"></section>
 
+  <details class="card add">
+    <summary><span class="sum-t">Aggiungi la tabella codici di un'altra regione</span><span class="sum-s">Excel, CSV o JSON</span></summary>
+    <div class="add-body">
+      <p class="hint">Serve un file con almeno due colonne: il <b>codice regionale</b> della prestazione e il <b>codice del nomenclatore nazionale</b> (es. 89.50). La descrizione è consigliata. Il file viene letto solo nel tuo browser e non viene inviato a nessun server; la tabella resta salvata in questo browser e puoi scaricarla in JSON per condividerla o aggiungerla al progetto.</p>
+      <div class="drop" id="drop">
+        <input type="file" id="file" accept=".xlsx,.xls,.xlsm,.ods,.csv,.txt,.json" aria-label="File della tabella codici">
+        <span><b>Scegli un file</b> o trascinalo qui</span>
+        <span class="small">.xlsx · .xls · .ods · .csv · .json</span>
+      </div>
+      <div id="imp" hidden></div>
+      <div id="mine"></div>
+    </div>
+  </details>
+
   <footer>
     <p><strong>Strumento indicativo.</strong> Le corrispondenze sono calcolate dai cataloghi pubblici e possono contenere errori o essere superate da aggiornamenti. Prima di prenotare conferma il codice con il CUP o con il medico prescrittore.</p>
     <p>Fonti: nomenclatore nazionale (Allegato 4 DPCM 12/01/2017 aggiornato); catalogo prestazioni Regione Toscana (<a href="https://dati.toscana.it/dataset/rt-prestazioni-specialistica" target="_blank" rel="noopener">OpenData Toscana</a>, CC BY); nomenclatore tariffario Lombardia DGR XII/3630 del 16/12/2024; codici SISS da <a href="https://www.dati.lombardia.it/Sanit-/Transcodifica-Codici-prestazioni/7ugz-vcug" target="_blank" rel="noopener">Open Data Lombardia – Transcodifica codici prestazioni</a>.</p>

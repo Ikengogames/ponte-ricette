@@ -10,12 +10,22 @@ codice regionale (es. Lombardia 088950)
         → codici dell'altra regione (Toscana 1601, B89005, B89006 …)
 ```
 
+È un sito statico: **nessun database e nessun backend**, si pubblica su qualsiasi server o hosting. Istruzioni in [INSTALLAZIONE.md](INSTALLAZIONE.md).
+
+## Aggiungere altre regioni
+
+Dalla pagina stessa, nel riquadro **Aggiungi la tabella codici di un'altra regione**, si può caricare un file **Excel (.xlsx, .xls, .ods), CSV o JSON** con il catalogo di un'altra regione. Serve almeno una colonna con il codice regionale e una con il codice del nomenclatore nazionale; la pagina riconosce da sola foglio, riga di intestazione e colonne, e si possono correggere a mano. Mostra anteprima e copertura prima di confermare.
+
+- Il file è letto **solo nel browser**: non viene inviato a nessun server. La tabella resta salvata in quel browser e compare nelle tendine "Regione della ricetta" e "Regione dove prenotare".
+- Con **Scarica JSON** si ottiene la tabella in formato standard. Mettendo quel file in `data/regioni/` e rilanciando la build, la regione diventa disponibile a tutti i visitatori (vedi [data/regioni/README.md](data/regioni/README.md)).
+
 ## Struttura
 
 ```
 data/
   raw/            fonti originali (PDF, CSV, Excel) — non modificarle a mano
   json/           JSON normalizzati generati dagli script
+  regioni/        tabelle di altre regioni (JSON), incluse nel sito dalla build
 scripts/          conversione fonti → JSON → dati del sito
 web/              sito: index.html, style.css, app.js, data/webdata.json
 dist/             pagina unica con tutto incluso (da pubblicare o inviare)

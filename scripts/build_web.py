@@ -5,12 +5,30 @@
 """
 import json
 
-from common import DIST, WEB, read_json
+from common import DIST, REGIONI, WEB, norm_code, read_json
 
 
 def short(s, n=220):
     s = s or ""
     return s if len(s) <= n else s[: n - 1].rstrip() + "…"
+
+
+def other_regions():
+    """Regioni aggiuntive da data/regioni/*.json: [{id, nome, fonte, voci: [[codice, descrizione, nazionale, branca, prescrivibile]]}]"""
+    out = []
+    for path in sorted(REGIONI.glob("*.json")):
+        obj = json.loads(path.read_text(encoding="utf-8"))
+        meta = obj.get("meta", {})
+        sigla = (meta.get("sigla") or path.stem.split("_")[-1]).upper()
+        if sigla in ("LOM", "TOS"):
+            print(f"  ATTENZIONE: {path.name} usa la sigla {sigla}, riservata; ignorato")
+            continue
+        voci = [[norm_code(v.get("codice_regionale")), short(v.get("descrizione")), norm_code(v.get("codice_nazionale")) or "",
+                 v.get("branca") or "", 0 if v.get("prescrivibile") is False else 1]
+                for v in obj["voci"] if v.get("codice_regionale")]
+        out.append({"id": sigla, "nome": meta.get("regione") or sigla, "fonte": meta.get("fonte") or "", "voci": voci})
+        print(f"  regione aggiuntiva {sigla} da {path.name} ({len(voci)} voci)")
+    return out
 
 
 def build_data():
@@ -31,6 +49,8 @@ def build_data():
         # Lombardia codici di prescrizione ufficiali DGR 3630: [siss, nazionale, descrizione]
         "LT": [[v["codice_prescrizione_siss"], v["codice_nazionale"], v["descrizione"]]
                for v in lomn["telemedicina_codici_prescrizione"]],
+        # Altre regioni da data/regioni/
+        "R": other_regions(),
     }
 
 

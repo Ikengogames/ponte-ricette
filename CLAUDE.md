@@ -16,6 +16,8 @@ Lingua del progetto: italiano (UI, commenti, commit).
 - `scripts/common.py` percorsi e regex condivise. Codice nazionale: `^\d{2}\.[0-9][0-9A-Z]?(\.[0-9A-Z]{1,2})?$` (es. 89.7, 89.7A.3, 88.95.B); genetica `G1.01`.
 - `scripts/build_*.py` un modulo per fonte, ognuno con `build()`; `build_all.py` li orchestra.
 - `web/app.js` logica: `resolve()` (codice regionale → nazionale), `targets()` (nazionale → voci dell'altra regione), `similar()` (fallback per descrizione). I dati arrivano da `#data` inline (pagina unica) o da `data/webdata.json`.
+- Regioni: `REG` in app.js. Lombardia ha logica propria (SISS); Toscana e tutte le altre sono tabelle generiche `[codice, descrizione, nazionale, branca, prescrivibile]`. Le altre arrivano da `data/regioni/*.json` (→ `R` in webdata, via `build_web.py`) o dal caricamento Excel/CSV/JSON nella pagina (salvate in `localStorage`, chiave `ponte.regioni.v1`).
+- Vincolo: sito statico, niente database né backend (deve girare su qualsiasi hosting). Excel letto con SheetJS caricato da CDN solo al bisogno. Guida per chi installa: `INSTALLAZIONE.md`.
 - `dist/ponte-codici-ricetta.html` è generato da `build_web.py` inlinando CSS, JS e dati: non modificarlo a mano.
 
 ## Cose scoperte sui dati (importanti)

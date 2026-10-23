@@ -7,6 +7,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw"
 JSON_DIR = ROOT / "data" / "json"
+# Tabelle di altre regioni aggiunte a mano (stesso formato del "Scarica JSON" del sito)
+REGIONI = ROOT / "data" / "regioni"
 WEB = ROOT / "web"
 DIST = ROOT / "dist"
 
